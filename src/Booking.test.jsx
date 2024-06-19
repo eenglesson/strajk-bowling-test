@@ -1,11 +1,5 @@
-import {
-  render,
-  screen,
-  fireEvent,
-  waitFor,
-  within,
-  getAllByLabelText,
-} from '@testing-library/react';
+import { render, screen, fireEvent, waitFor } from '@testing-library/react';
+import '@testing-library/jest-dom';
 import App from './App';
 import './setupTests'; // Ensure this file sets up the MSW server
 
@@ -104,8 +98,8 @@ describe('Bowling Booking App', () => {
     fireEvent.click(screen.getByText(/strIIIIIike!/i));
 
     await waitFor(() => {
-      expect(screen.getByText(/340 sek/i));
-      expect(screen.getByDisplayValue('1234'));
+      expect(screen.getByText(/340 sek/i)).toBeInTheDocument();
+      expect(screen.getByDisplayValue('1234')).toBeInTheDocument();
     });
   });
 
@@ -139,8 +133,8 @@ describe('Bowling Booking App', () => {
     fireEvent.click(screen.getByText(/strIIIIIike!/i));
 
     await waitFor(() => {
-      expect(screen.getByText(/340 sek/i));
-      expect(screen.getByDisplayValue('1234'));
+      expect(screen.getByText(/340 sek/i)).toBeInTheDocument();
+      expect(screen.getByDisplayValue('1234')).toBeInTheDocument();
     });
 
     // Step 2: Click the button to navigate back to the booking view
@@ -149,10 +143,12 @@ describe('Bowling Booking App', () => {
 
     // Step 3: Assert that the booking view is displayed
     await waitFor(() => {
-      expect(screen.getByLabelText(/Date/i));
-      expect(screen.getByLabelText(/Time/i));
-      expect(screen.getByLabelText(/Number of awesome bowlers/i));
-      expect(screen.getByLabelText(/Number of lanes/i));
+      expect(screen.getByLabelText(/Date/i)).toBeInTheDocument();
+      expect(screen.getByLabelText(/Time/i)).toBeInTheDocument();
+      expect(
+        screen.getByLabelText(/Number of awesome bowlers/i)
+      ).toBeInTheDocument();
+      expect(screen.getByLabelText(/Number of lanes/i)).toBeInTheDocument();
     });
   });
 
@@ -213,7 +209,7 @@ describe('Bowling Booking App', () => {
         screen.getByText(
           /Fill out all the fields and make sure that people and shoes is the same number./i
         )
-      );
+      ).toBeInTheDocument();
     });
   });
 
@@ -263,7 +259,7 @@ describe('Bowling Booking App', () => {
         screen.getByText(
           /Fill out all the fields and make sure that people and shoes is the same number./i
         )
-      );
+      ).toBeInTheDocument();
     });
   });
 });
